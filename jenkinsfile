@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    stages{
+        stage("vcs"){
+            steps{
+                git url : "https://github.com/thatikrishna/saleor-dashboard.git",
+                branch : 'main'
+            }
+        }
+        stage("build"){
+            steps{
+                sh "docker image build -t thatikrishna/saleor-dashboard:Dev"
+            }
+         }
+         stage("push to repo"){
+            steps{
+                sh "docker image push thatikrishna/saleor-dashboard:Dev"
+            }
+        }
+    } 
+   
+
+}
